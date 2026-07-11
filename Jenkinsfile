@@ -8,16 +8,26 @@ pipeline {
     stages {
         stage('Instalação das dependencias') {
             steps {
+                echo 'Instalando os pacotes node...'
                 bat 'npm install'
-                bat 'npm test'
 
             }
         }
 
         stage('Execução dos testes') {
             steps {
+                echo 'Executando os testes...'
                 bat 'npm test'
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build e testes executados com sucesso'
+        }
+        failure {
+            echo 'Falha na execução do pipeline'
         }
     }
 }
